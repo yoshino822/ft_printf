@@ -45,7 +45,7 @@ int ft_printf(const char *format, ...)
 	va_end(args);
 	return (len);
 }
-
+/*
 int	main(void)
 {
 	int	count;
@@ -55,4 +55,4 @@ int	main(void)
 	count = printf("%x\n", 42);
 	printf("The chars written are %d\n", count);
 	return (0);
-}
+}*/

@@ -1,7 +1,8 @@
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c print_format.c print_num.c print_s.c print_c.c
+SRC = ft_printf.c ft_putchar.c print_type_d_i.c print_type_p.c\
+print_type_s.c print_type_u.c print_type_x.c
 
 HEAD = includes
 
