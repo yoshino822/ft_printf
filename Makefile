@@ -1,7 +1,9 @@
 
 NAME = libftprintf.a
 
-SRC = ft_printf.c
+SRC = ft_printf.c print_format.c print_num.c print_s.c print_c.c
+
+HEAD = includes
 
 OBJ = ${SRC:.c=.o}
 
@@ -9,8 +11,8 @@ CC = gcc
 
 CFLAG = -Wall -Wextra -Werror
 
-${OBJ}:${SRC}
-	${CC} ${CFLAG} -c $< -o $@
+.c.o:
+	${CC} ${CFLAGS} -I ${HEAD} -c $< -o ${<:.c=.o}
 
 all: ${NAME}
 
@@ -20,7 +22,6 @@ ${NAME}: ${OBJ}
 
 clean:
 	rm -f ${OBJ}
-	rm -f ${EXE}
 	@echo "${OBJ} deleted"
 
 fclean: clean
