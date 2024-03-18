@@ -8,8 +8,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-void	ft_putchar(char c);
-void	print_type_p(unsigned long int n, int *len);
+int	ft_putchar(char c);
+void	print_type_p(size_t n, int *len);
 void	print_type_d_i(int n, int *len);
 void	print_type_u(unsigned int n, int *len);
 void	print_type_x(unsigned int n, int *len, int hexa);
