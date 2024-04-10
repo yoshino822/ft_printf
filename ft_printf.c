@@ -1,62 +1,67 @@
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybollen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/20 13:25:19 by ybollen           #+#    #+#             */
+/*   Updated: 2024/03/20 13:25:23 by ybollen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_format(char format_type, va_list args, int *len)
+int	print_format(char format_type, va_list args)
 {
-	if(format_type == 'c')
-	{
-		*len++;
-		ft_putchar(va_arg(args, int)); // int because you need only 1 byte integer; //maybe wrong
-	}
+	int	len;
+
+	len = 0;
+	if (format_type == 'c')
+		len += ft_putchar((char)va_arg(args, int));
 	else if (format_type == 's')
 	{
-		*len++;
-		print_type_s(va_arg(args, char *));
+		len += print_type_s(va_arg(args, char *));
 	}
 	else if (format_type == 'p')
-		print_type_p(va_arg(args, size_t), len);
+		len += print_type_p(va_arg(args, size_t));
 	else if (format_type == 'd' || format_type == 'i')
-		print_type_d_i(va_arg(args, int), len); // base 10
+		len += print_type_d_i(va_arg(args, int));
 	else if (format_type == 'u')
-		print_type_u(va_arg(args, unsigned int), len);
+		len += print_type_u(va_arg(args, unsigned int));
 	else if (format_type == 'x')
-		print_type_x(va_arg(args, unsigned int), len, 'x');
+		len += print_type_x(va_arg(args, unsigned int), 'x');
 	else if (format_type == 'X')
-		print_type_x(va_arg(args, unsigned int), len, 'X');
+		len += print_type_x(va_arg(args, unsigned int), 'X');
 	else if (format_type == '%')
-	{
-		*len++;
-		ft_putchar('%'); //maybe wrong
-	}
+		len += ft_putchar('%');
+	return (len);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	int	len;
+	va_list	args;
+	int		len;
 
 	va_start(args, format);
 	len = 0;
 	while (*format)
 	{
-		if(*format == '%')
+		if (*format == '%')
 		{
-			format++; //advance one time after '%';
-			print_format(*format, args, &len);
+			format++;
+			len += print_format(*format, args);
 		}
 		else
 		{
-			len++;
-			ft_putchar(*format);
+			len += ft_putchar(*format);
 		}
 		format++;
 	}
 	va_end(args);
 	return (len);
 }
-
+/*
 int	main(void)
 {
 	int	count;
@@ -66,4 +71,4 @@ int	main(void)
 	count = printf("%x\n", 42);
 	printf("The chars written are %d\n", count);
 	return (0);
-}
+}*/

@@ -1,2 +1,4 @@
 .idea
 /cmake-build-debug/
+libftprintf.a
+*.o

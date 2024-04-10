@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_type_s.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybollen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/20 13:26:09 by ybollen           #+#    #+#             */
+/*   Updated: 2024/03/20 13:26:11 by ybollen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -10,11 +20,11 @@ int	print_type_s(char *str)
 	if (!str)
 	{
 		write(1, "(null)", 6);
-		return(i + 6);
+		return (i + 6);
 	}
 	while (str[i])
 	{
-		ft_putchar((int)str[i]);  //maybe wrong
+		ft_putchar((int)str[i]);
 		i++;
 	}
 	return (i);

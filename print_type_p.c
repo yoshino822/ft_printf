@@ -1,29 +1,49 @@
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_type_p.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybollen <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/20 13:27:22 by ybollen           #+#    #+#             */
+/*   Updated: 2024/03/20 13:27:26 by ybollen          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_type_p(unsigned long int n, int *len)
+int	print_ptr(unsigned long long n)
 {
-	char	c;
+	int	len;
 
-	write(1, "0x", 2);
-	*len += 2;
+	len = 0;
 	if (n >= 16)
 	{
-		print_type_p(n / 16, len);
-		print_type_p(n % 16, len);
+		len += print_ptr(n / 16);
+		len += print_ptr(n % 16);
 	}
-	else if (n <= 9)  //base = "0123456789abcdef";
+	else if (n >= 10)
+		len += ft_putchar(n - 10 + 'a');
+	else
+		len += ft_putchar(n + '0');
+	return (len);
+}
+
+int	print_type_p(unsigned long long n)
+{
+	int	len;
+
+	len = 0;
+	if (!n)
 	{
-		*len++;
-		c = n + '0'; // change to char number;
-		ft_putchar(c);
+		len += print_type_s("(nil)");
+		return (len);
 	}
-	else // if (10 < n < 16)
+	else if (n)
 	{
-		*len++;
-		c = n - 87;// conversion from hexa to char (e.g. hexa c to char c)
-		ft_putchar(c);
-	} // if n = 12 (hex C) -> n - 10(excl 0-9) + '0'(to convert to char) + 17('0'+17= C in char) + 32(to char c)
+		write(1, "0x", 2);
+		len += 2;
+		len += print_ptr(n);
+	}
+	return (len);
 }

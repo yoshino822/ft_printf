@@ -1,21 +1,33 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ybollen <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/03/20 13:27:11 by ybollen           #+#    #+#              #
+#    Updated: 2024/03/20 13:27:13 by ybollen          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC = ft_printf.c ft_putchar.c print_type_d_i.c print_type_p.c\
 print_type_s.c print_type_u.c print_type_x.c
 
-HEAD = includes
 
 OBJ = ${SRC:.c=.o}
 
-CC = gcc
+CC = cc
 
-CFLAG = -Wall -Wextra -Werror
-
-.c.o:
-	${CC} ${CFLAGS} -I ${HEAD} -c $< -o ${<:.c=.o}
+CFLAGS = -Wall -Wextra -Werror
 
 all: ${NAME}
+
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+
+
 
 ${NAME}: ${OBJ}
 	ar rcs ${NAME} ${OBJ}
